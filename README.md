@@ -1,5 +1,16 @@
 # GarageSale2
 
+## FireBase
+
+```bash
+firebase init
+
+firebase deploy
+```
+
+## ENV
+https://garage-sale-2-371af.web.app/
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
 
 ## Development server
