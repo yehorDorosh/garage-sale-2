@@ -1,0 +1,35 @@
+<form>
+  <app-input
+    type="email"
+    label="Email:"
+    id="email"
+    placeholder="user@email.com"
+    autocomplete="email"
+    (input)="onInput($event)"
+  />
+
+  <app-input
+    type="password"
+    label="Password:"
+    id="password"
+    placeholder="********"
+    (input)="onInput($event)"
+  />
+
+  <app-input
+    type="password"
+    label="Repeat password:"
+    id="r-password"
+    placeholder="********"
+    (input)="onInput($event)"
+  />
+
+  <app-input
+    type="tel"
+    label="Phone:"
+    id="phone"
+    placeholder="+351123456789"
+    autocomplete="tel"
+    (input)="onInput($event)"
+  />
+</form>

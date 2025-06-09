@@ -1,0 +1,13 @@
+<div>
+  @if (label()) {
+  <label [for]="id()" class="block m-1">{{ label() }}</label>
+  }
+
+  <input
+    #input
+    [id]="id()"
+    [name]="id()"
+    [type]="type()"
+    class="block border border-gray-400 rounded-lg p-1 m-1 placeholder:text-gray-300"
+  />
+</div>
