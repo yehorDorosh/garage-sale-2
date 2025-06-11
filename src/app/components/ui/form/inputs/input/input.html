@@ -9,5 +9,7 @@
     [name]="id()"
     [type]="type()"
     class="block border border-gray-400 rounded-lg p-1 m-1 placeholder:text-gray-300"
+    [value]="value"
+    (input)="onInput($event)"
   />
 </div>

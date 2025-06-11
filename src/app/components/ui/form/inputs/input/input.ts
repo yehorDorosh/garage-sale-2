@@ -6,15 +6,43 @@ import {
   OnInit,
   Renderer2,
   viewChild,
+  forwardRef,
 } from '@angular/core';
+import {
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-input',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './input.html',
   styleUrl: './input.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => Input),
+      multi: true,
+    },
+  ],
 })
-export class Input implements OnInit {
+
+/**
+ * <app-input
+    type="email"
+    label="Email:"
+    id="email"
+    placeholder="user@email.com"
+    autocomplete="email"
+    ngModel
+    [ngModelOptions]="{name: 'email'}"
+    required
+    email
+    #email="ngModel"
+  />
+ */
+export class Input implements OnInit, ControlValueAccessor {
   private rerender = inject(Renderer2);
 
   label = input<string | null>(null);
@@ -44,5 +72,33 @@ export class Input implements OnInit {
         attrs[i].value
       );
     }
+  }
+
+  // ControlValueAccessor
+
+  value: string = '';
+
+  onChange = (_: any) => {};
+  onTouched = () => {};
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {}
+
+  onInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.value = input.value;
+    this.onChange(this.value);
+    this.onTouched();
   }
 }

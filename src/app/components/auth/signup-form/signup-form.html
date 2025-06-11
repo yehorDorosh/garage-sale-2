@@ -1,35 +1,8 @@
 <form>
-  <app-input
-    type="email"
-    label="Email:"
-    id="email"
-    placeholder="user@email.com"
-    autocomplete="email"
-    (input)="onInput($event)"
-  />
-
-  <app-input
-    type="password"
-    label="Password:"
-    id="password"
-    placeholder="********"
-    (input)="onInput($event)"
-  />
-
-  <app-input
-    type="password"
-    label="Repeat password:"
-    id="r-password"
-    placeholder="********"
-    (input)="onInput($event)"
-  />
-
-  <app-input
-    type="tel"
-    label="Phone:"
-    id="phone"
-    placeholder="+351123456789"
-    autocomplete="tel"
-    (input)="onInput($event)"
-  />
+  <button
+    type="submit"
+    class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+  >
+    Register
+  </button>
 </form>
