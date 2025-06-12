@@ -1,96 +1,156 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="email" class="block m-1">Email: *</label>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+  <h2 class="mx-1 my-2 text-2xl font-bold text-center">Registration</h2>
+  <p class="text-center">
+    Contact details are optional, but they will help buyers reach out to you
+    directly as quickly as possible.
+  </p>
 
-    <input
-      id="email"
-      class="block border border-gray-400 rounded-lg p-1 m-1 placeholder:text-gray-300"
-      type="email"
-      name="email"
-      autocomplete="email"
-      placeholder="user@email.com"
-      formControlName="email"
-    />
-    @if (emailInvalid) {
-    <p class="text-red-600 m-1">
-      The email is required and should contain &#64; symbol, domain name after
-      dot.
-    </p>
+  <div class="max-w-md mx-auto">
+    <div>
+      <label for="email" class="block m-1">Email: *</label>
+
+      <input
+        id="email"
+        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        type="email"
+        name="email"
+        autocomplete="email"
+        placeholder="user@email.com"
+        formControlName="email"
+      />
+      @if (emailInvalid) {
+      <p class="text-red-600 m-1">
+        The email is required and should contain &#64; symbol, domain name after
+        dot.
+      </p>
+      }
+    </div>
+
+    <div>
+      <label for="password" class="block m-1">Password: *</label>
+
+      <input
+        id="password"
+        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        type="password"
+        name="password"
+        autocomplete="new-password"
+        placeholder="******"
+        formControlName="password"
+      />
+      @if (passwordInvalid) {
+      <p class="text-red-600 m-1">
+        The password is required and should contain at least 6 symbols, at least
+        1 capital case letter, and at least 1 diggit.
+      </p>
+      }
+    </div>
+
+    <div>
+      <label for="confirmPassword" class="block m-1">Repeat password: *</label>
+
+      <input
+        id="confirmPassword"
+        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        type="password"
+        name="confirmPassword"
+        placeholder="******"
+        formControlName="confirmPassword"
+      />
+      @if (confirmPasswordInvalid) {
+      <p class="text-red-600 m-1">Passwords must match.</p>
+      }
+    </div>
+
+    <div>
+      <label for="phone" class="block m-1">Phone (not necessarily): </label>
+
+      <input
+        id="phone"
+        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        type="tel"
+        name="phone"
+        autocomplete="tel"
+        placeholder="+351 111 111 111"
+        formControlName="phone"
+      />
+
+      @if (phoneInvalid) {
+      <p class="text-red-600 m-1">Phone should start form '+ country code'</p>
+      }
+    </div>
+
+    @if(hasPhoneNumber) {
+    <fieldset formArrayName="messanger" class="m-1">
+      <legend>Messanger:</legend>
+
+      <div>
+        <input
+          id="telegram"
+          class="m-1 cursor-pointer"
+          type="checkbox"
+          name="messanger"
+          value="telegram"
+          formControlName="0"
+        />
+        <label for="telegram" class="m-1 select-none cursor-pointer"
+          >Telegram</label
+        >
+      </div>
+
+      <div>
+        <input
+          id="viber"
+          class="m-1 cursor-pointer"
+          type="checkbox"
+          name="messanger"
+          value="viber"
+          formControlName="1"
+        />
+        <label for="viber" class="m-1 select-none cursor-pointer">Viber</label>
+      </div>
+
+      <div>
+        <input
+          id="whatsapp"
+          class="m-1 cursor-pointer"
+          type="checkbox"
+          name="messanger"
+          value="whatsapp"
+          formControlName="2"
+        />
+        <label for="whatsapp" class="m-1 select-none cursor-pointer"
+          >WhatsApp</label
+        >
+      </div>
+    </fieldset>
     }
+
+    <div>
+      <label for="slackUsername" class="block m-1"
+        >Slack user name (not necessarily):
+      </label>
+
+      <input
+        id="slackUsername"
+        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        type="text"
+        name="slackUsername"
+        autocomplete="username"
+        placeholder="John Doe"
+        formControlName="slackUsername"
+      />
+    </div>
   </div>
 
-  <div>
-    <label for="password" class="block m-1">Password: *</label>
-
-    <input
-      id="password"
-      class="block border border-gray-400 rounded-lg p-1 m-1 placeholder:text-gray-300"
-      type="password"
-      name="password"
-      autocomplete="new-password"
-      placeholder="******"
-      formControlName="password"
-    />
-    @if (passwordInvalid) {
-    <p class="text-red-600 m-1">
-      The password is required and should contain at least 6 symbols, at least 1
-      capital case letter, and at least 1 diggit.
-    </p>
-    }
+  <div class="my-4 text-center">
+    <button
+      type="submit"
+      class="m-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+    >
+      Register
+    </button>
   </div>
 
-  <div>
-    <label for="confirmPassword" class="block m-1">Repeat password: *</label>
-
-    <input
-      id="confirmPassword"
-      class="block border border-gray-400 rounded-lg p-1 m-1 placeholder:text-gray-300"
-      type="password"
-      name="confirmPassword"
-      placeholder="******"
-      formControlName="confirmPassword"
-    />
-    @if (confirmPasswordInvalid) {
-    <p class="text-red-600 m-1">Passwords must match.</p>
-    }
-  </div>
-
-  <div>
-    <label for="phone" class="block m-1">Phone: </label>
-
-    <input
-      id="phone"
-      class="block border border-gray-400 rounded-lg p-1 m-1 placeholder:text-gray-300"
-      type="tel"
-      name="phone"
-      autocomplete="tel"
-      placeholder="+351 111 111 111"
-      formControlName="phone"
-    />
-
-    @if (phoneInvalid) {
-    <p class="text-red-600 m-1">Phone should start form '+ country code'</p>
-    }
-  </div>
-
-  <div>
-    <label for="slackUsername" class="block m-1">Slack user name: </label>
-
-    <input
-      id="slackUsername"
-      class="block border border-gray-400 rounded-lg p-1 m-1 placeholder:text-gray-300"
-      type="text"
-      name="slackUsername"
-      autocomplete="username"
-      placeholder="John Doe"
-      formControlName="slackUsername"
-    />
-  </div>
-
-  <button
-    type="submit"
-    class="m-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-  >
-    Register
-  </button>
+  <p class="text-center">Fields marked with * are required.</p>
 </form>

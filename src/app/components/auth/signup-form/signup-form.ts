@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
   AbstractControl,
+  FormArray,
 } from '@angular/forms';
 
 @Component({
@@ -39,9 +40,11 @@ export class SignupForm {
         Validators.pattern('^\\+[0-9]{1,3}[0-9\\s\\-()]{6,19}$'),
       ],
     }),
-    messenger: new FormControl('', {
-      validators: [Validators.maxLength(254)],
-    }),
+    messanger: new FormArray([
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+    ]),
     slackUsername: new FormControl('', {
       validators: [Validators.maxLength(254)],
     }),
@@ -92,6 +95,10 @@ export class SignupForm {
       this.form.controls.phone.dirty &&
       this.form.controls.phone.invalid
     );
+  }
+
+  get hasPhoneNumber() {
+    return !!this.form.controls.phone.value;
   }
 
   onSubmit() {
