@@ -1,0 +1,58 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+  <h2 class="mx-1 my-2 text-2xl font-bold text-center">Login</h2>
+
+  @if (loading()) {
+  <p class="m-1">Loading...</p>
+  } @if (beError) {
+  <p class="m-1 text-red-600">{{ beError}}</p>
+  }
+
+  <div class="max-w-md mx-auto">
+    <div>
+      <label for="email" class="block m-1">Email:</label>
+
+      <input
+        id="email"
+        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        type="email"
+        name="email"
+        autocomplete="email"
+        placeholder="user@email.com"
+        formControlName="email"
+      />
+      @if (emailInvalid) {
+      <p class="text-red-600 m-1">The email is required.</p>
+      }
+    </div>
+
+    <div>
+      <label for="password" class="block m-1">Password:</label>
+
+      <input
+        id="password"
+        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        type="password"
+        name="password"
+        autocomplete="current-password"
+        placeholder="******"
+        formControlName="password"
+      />
+      @if (passwordInvalid) {
+      <p class="text-red-600 m-1">The password is required.</p>
+      }
+    </div>
+  </div>
+
+  <div class="my-4 text-center">
+    <button
+      type="submit"
+      class="m-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+    >
+      Login
+    </button>
+  </div>
+
+  @if (form.invalid) {
+  <p class="text-red-600 m-1">Please enter valid data.</p>
+  }
+</form>
