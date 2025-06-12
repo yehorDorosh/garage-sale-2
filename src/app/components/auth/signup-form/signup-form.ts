@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
 import {
   ReactiveFormsModule,
   FormControl,
@@ -7,6 +9,8 @@ import {
   AbstractControl,
   FormArray,
 } from '@angular/forms';
+import { FirebaseError } from 'firebase/app';
+import { doc, setDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-signup-form',
@@ -15,6 +19,12 @@ import {
   styleUrl: './signup-form.scss',
 })
 export class SignupForm {
+  private auth = inject(Auth);
+  private fireStore = inject(Firestore);
+
+  loading = signal(false);
+  beError = '';
+
   form = new FormGroup({
     email: new FormControl('', {
       validators: [
@@ -101,7 +111,43 @@ export class SignupForm {
     return !!this.form.controls.phone.value;
   }
 
-  onSubmit() {
-    console.log(this.form, this.form.value?.email);
+  async onSubmit() {
+    // console.log(this.form, this.form.value?.email);
+    this.beError = '';
+    if (this.form.invalid) return;
+    this.loading.set(true);
+
+    const email = this.form.value.email!;
+    const password = this.form.value.password!;
+    const phone = this.form.value.phone || null;
+    const messanger = this.form.value.messanger;
+    const slackUsername = this.form.value.slackUsername || null;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+      console.log('User registered:', userCredential.user);
+
+      const uid = userCredential.user.uid;
+      await setDoc(doc(this.fireStore, 'users', uid), {
+        email,
+        phone,
+        messanger,
+        slackUsername,
+      });
+      console.log('User data saved');
+      this.form.reset();
+      this.loading.set(false);
+    } catch (error) {
+      this.loading.set(false);
+      console.error('Registration error:', error);
+
+      if (error instanceof FirebaseError) {
+        this.beError = error.code;
+      }
+    }
   }
 }
