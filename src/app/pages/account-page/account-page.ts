@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MainTemp } from '../../components/layout/page-template/main-temp/main-temp';
 import { Auth, deleteUser } from '@angular/fire/auth';
 import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-page',
@@ -12,6 +13,7 @@ import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
 export class AccountPage {
   auth = inject(Auth);
   firestore = inject(Firestore);
+  private router = inject(Router);
 
   async onDeleteAccount() {
     if (
@@ -24,6 +26,7 @@ export class AccountPage {
         try {
           await deleteDoc(doc(this.firestore, 'users', user.uid));
           await deleteUser(user);
+          this.router.navigate(['/']);
           console.log('Account deleted successfully.');
         } catch (error) {
           console.log('Failed to delete account: ' + error);

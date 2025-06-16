@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Auth, signOut } from '@angular/fire/auth';
 import { RouterModule } from '@angular/router';
+import { User } from '../../../services/auth/user';
 
 @Component({
   selector: 'app-header',
@@ -9,15 +9,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './header.scss',
 })
 export class Header {
-  auth = inject(Auth);
+  user = inject(User);
 
   onLogout() {
-    signOut(this.auth)
-      .then(() => {
-        console.log('Logout successful');
-      })
-      .catch((error) => {
-        console.error('Logout failed', error);
-      });
+    this.user.logOut();
   }
 }

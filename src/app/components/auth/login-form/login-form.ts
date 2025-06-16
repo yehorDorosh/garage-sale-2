@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
 
 @Component({
@@ -16,6 +17,7 @@ import { FirebaseError } from 'firebase/app';
 })
 export class LoginForm {
   private auth = inject(Auth);
+  private router = inject(Router);
 
   loading = signal(false);
   beError = '';
@@ -53,6 +55,7 @@ export class LoginForm {
       if (email && password) {
         await signInWithEmailAndPassword(this.auth, email, password);
         console.log('Login successful');
+        this.router.navigate(['/']);
       } else {
         throw new Error('Email and password are required');
       }

@@ -9,6 +9,7 @@ import {
   AbstractControl,
   FormArray,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
 import { doc, setDoc } from 'firebase/firestore';
 
@@ -21,6 +22,7 @@ import { doc, setDoc } from 'firebase/firestore';
 export class SignupForm {
   private auth = inject(Auth);
   private fireStore = inject(Firestore);
+  private router = inject(Router);
 
   loading = signal(false);
   beError = '';
@@ -141,6 +143,7 @@ export class SignupForm {
       console.log('User data saved');
       this.form.reset();
       this.loading.set(false);
+      this.router.navigate(['/']);
     } catch (error) {
       this.loading.set(false);
       console.error('Registration error:', error);
