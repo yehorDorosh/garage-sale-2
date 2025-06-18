@@ -5,13 +5,14 @@ import {
   User as FirebaseUser,
   signOut,
 } from '@angular/fire/auth';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
 })
 export class User {
   auth = inject(Auth);
-  isLoggedIn = signal(false);
+  isLoggedIn = signal<boolean>(false);
 
   constructor() {
     onAuthStateChanged(this.auth, (user: FirebaseUser | null) => {
