@@ -1,8 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MainTemp } from '../../components/layout/page-template/main-temp/main-temp';
 import { Auth, deleteUser } from '@angular/fire/auth';
 import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { User } from '../../services/auth/user';
+import { getDoc } from 'firebase/firestore';
+import { UserData } from '../../types/user.model';
 
 @Component({
   selector: 'app-account-page',
@@ -10,10 +13,30 @@ import { Router } from '@angular/router';
   templateUrl: './account-page.html',
   styleUrl: './account-page.scss',
 })
-export class AccountPage {
-  auth = inject(Auth);
-  firestore = inject(Firestore);
+export class AccountPage implements OnInit {
+  private auth = inject(Auth);
+  private firestore = inject(Firestore);
   private router = inject(Router);
+  private user = inject(User);
+  email = signal<string | null>(null);
+  phone = signal<string | null>(null);
+  messanger = signal<[boolean, boolean, boolean] | null>(null);
+  slackUsername = signal<string | null>(null);
+
+  async ngOnInit() {
+    const uid = this.user.uid();
+    if (!uid) return;
+    const userDocRef = doc(this.firestore, 'users', uid);
+    const userSnap = await getDoc(userDocRef);
+
+    if (userSnap.exists()) {
+      const data = userSnap.data() as UserData;
+      this.email.set(data.email);
+      this.phone.set(data.phone);
+      this.messanger.set(data.messanger);
+      this.slackUsername.set(data.slackUsername);
+    }
+  }
 
   async onDeleteAccount() {
     if (
