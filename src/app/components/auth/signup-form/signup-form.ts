@@ -44,7 +44,7 @@ export class SignupForm {
       ],
     }),
     confirmPassword: new FormControl('', {
-      validators: [this.comparePasswords],
+      validators: [this.comparePasswords, Validators.required],
     }),
     phone: new FormControl('', {
       validators: [
@@ -115,6 +115,8 @@ export class SignupForm {
 
   async onSubmit() {
     // console.log(this.form, this.form.value?.email);
+    this.form.markAllAsTouched();
+    this.form.markAllAsDirty();
     this.beError = '';
     if (this.form.invalid) return;
     this.loading.set(true);

@@ -6,10 +6,11 @@ import { Router } from '@angular/router';
 import { User } from '../../services/auth/user';
 import { getDoc } from 'firebase/firestore';
 import { UserData } from '../../types/user.model';
+import { EditUserFrom } from '../../components/auth/edit-user-from/edit-user-from';
 
 @Component({
   selector: 'app-account-page',
-  imports: [MainTemp],
+  imports: [MainTemp, EditUserFrom],
   templateUrl: './account-page.html',
   styleUrl: './account-page.scss',
 })
@@ -23,7 +24,11 @@ export class AccountPage implements OnInit {
   messanger = signal<[boolean, boolean, boolean] | null>(null);
   slackUsername = signal<string | null>(null);
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.getUserData();
+  }
+
+  async getUserData() {
     const uid = this.user.uid();
     if (!uid) return;
     const userDocRef = doc(this.firestore, 'users', uid);

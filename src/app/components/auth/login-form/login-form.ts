@@ -48,6 +48,8 @@ export class LoginForm {
   }
 
   async onSubmit() {
+    this.form.markAllAsTouched();
+    this.form.markAllAsDirty();
     this.loading.set(true);
     this.beError = '';
     try {
