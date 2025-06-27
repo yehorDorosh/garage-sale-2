@@ -1,12 +1,6 @@
 <app-main-temp>
   <h1>My account.</h1>
 
-  <p>email: {{ email() }}</p>
-
-  <p>phone: {{ phone() }}</p>
-
-  <p>user name: {{ slackUsername() }}</p>
-
   @if (email()) {
   <app-edit-user-from
     [emailCurrent]="email() || ''"

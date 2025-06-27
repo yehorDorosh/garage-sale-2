@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
-  <h2 class="mx-1 my-2 text-2xl font-bold text-center">Registration</h2>
+  <h2 class="mx-1 my-2 text-2xl font-bold text-center">Account</h2>
 
   @if (loading()) {
   <p class="m-1">Loading...</p>
@@ -11,14 +11,9 @@
   </p>
   }
 
-  <p class="text-center">
-    Contact details are optional, but they will help buyers reach out to you
-    directly as quickly as possible.
-  </p>
-
   <div class="max-w-md mx-auto">
     <div>
-      <label for="email" class="block m-1">Email: *</label>
+      <label for="email" class="block m-1">Email:</label>
 
       <input
         id="email"
@@ -38,7 +33,7 @@
     </div>
 
     <div>
-      <label for="password" class="block m-1">Password: *</label>
+      <label for="password" class="block m-1">Password:</label>
 
       <input
         id="password"
@@ -58,7 +53,7 @@
     </div>
 
     <div>
-      <label for="confirmPassword" class="block m-1">Repeat password: *</label>
+      <label for="confirmPassword" class="block m-1">Repeat password:</label>
 
       <input
         id="confirmPassword"
@@ -159,9 +154,7 @@
       type="submit"
       class="m-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
     >
-      Save
+      Update account
     </button>
   </div>
-
-  <p class="text-center">Fields marked with * are required.</p>
 </form>
