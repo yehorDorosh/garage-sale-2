@@ -12,12 +12,12 @@
   }
 
   <div class="max-w-md mx-auto">
-    <div>
+    <div [appDropout]="'Email'">
       <label for="email" class="block m-1">Email:</label>
 
       <input
         id="email"
-        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        class="block w-full border border-gray-400 rounded-lg p-2 placeholder:text-gray-300"
         type="email"
         name="email"
         autocomplete="email"
@@ -32,48 +32,50 @@
       }
     </div>
 
-    <div>
-      <label for="password" class="block m-1">Password:</label>
+    <div [appDropout]="'Password'">
+      <div>
+        <label for="password" class="block m-1">Password:</label>
 
-      <input
-        id="password"
-        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
-        type="password"
-        name="password"
-        autocomplete="new-password"
-        placeholder="******"
-        formControlName="password"
-      />
-      @if (passwordInvalid) {
-      <p class="text-red-600 m-1">
-        The password is required and should contain at least 6 symbols, at least
-        1 capital case letter, and at least 1 diggit.
-      </p>
-      }
+        <input
+          id="password"
+          class="block w-full border border-gray-400 rounded-lg p-2 placeholder:text-gray-300"
+          type="password"
+          name="password"
+          autocomplete="new-password"
+          placeholder="******"
+          formControlName="password"
+        />
+        @if (passwordInvalid) {
+        <p class="text-red-600 m-1">
+          The password is required and should contain at least 6 symbols, at
+          least 1 capital case letter, and at least 1 diggit.
+        </p>
+        }
+      </div>
+
+      <div>
+        <label for="confirmPassword" class="block m-1">Repeat password:</label>
+
+        <input
+          id="confirmPassword"
+          class="block w-full border border-gray-400 rounded-lg p-2 placeholder:text-gray-300"
+          type="password"
+          name="confirmPassword"
+          placeholder="******"
+          formControlName="confirmPassword"
+        />
+        @if (confirmPasswordInvalid) {
+        <p class="text-red-600 m-1">Passwords must match.</p>
+        }
+      </div>
     </div>
 
-    <div>
-      <label for="confirmPassword" class="block m-1">Repeat password:</label>
-
-      <input
-        id="confirmPassword"
-        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
-        type="password"
-        name="confirmPassword"
-        placeholder="******"
-        formControlName="confirmPassword"
-      />
-      @if (confirmPasswordInvalid) {
-      <p class="text-red-600 m-1">Passwords must match.</p>
-      }
-    </div>
-
-    <div>
+    <div [appDropout]="'Phone'">
       <label for="phone" class="block m-1">Phone (not necessarily): </label>
 
       <input
         id="phone"
-        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        class="block w-full border border-gray-400 rounded-lg p-2 placeholder:text-gray-300"
         type="tel"
         name="phone"
         autocomplete="tel"
@@ -83,63 +85,63 @@
 
       @if (phoneInvalid) {
       <p class="text-red-600 m-1">Phone should start form '+ country code'</p>
+      } @if(hasPhoneNumber) {
+      <fieldset formArrayName="messanger" class="m-1">
+        <legend>Messanger:</legend>
+
+        <div>
+          <input
+            id="telegram"
+            class="m-1 cursor-pointer"
+            type="checkbox"
+            name="messanger"
+            value="telegram"
+            formControlName="0"
+          />
+          <label for="telegram" class="m-1 select-none cursor-pointer"
+            >Telegram</label
+          >
+        </div>
+
+        <div>
+          <input
+            id="viber"
+            class="m-1 cursor-pointer"
+            type="checkbox"
+            name="messanger"
+            value="viber"
+            formControlName="1"
+          />
+          <label for="viber" class="m-1 select-none cursor-pointer"
+            >Viber</label
+          >
+        </div>
+
+        <div>
+          <input
+            id="whatsapp"
+            class="m-1 cursor-pointer"
+            type="checkbox"
+            name="messanger"
+            value="whatsapp"
+            formControlName="2"
+          />
+          <label for="whatsapp" class="m-1 select-none cursor-pointer"
+            >WhatsApp</label
+          >
+        </div>
+      </fieldset>
       }
     </div>
 
-    @if(hasPhoneNumber) {
-    <fieldset formArrayName="messanger" class="m-1">
-      <legend>Messanger:</legend>
-
-      <div>
-        <input
-          id="telegram"
-          class="m-1 cursor-pointer"
-          type="checkbox"
-          name="messanger"
-          value="telegram"
-          formControlName="0"
-        />
-        <label for="telegram" class="m-1 select-none cursor-pointer"
-          >Telegram</label
-        >
-      </div>
-
-      <div>
-        <input
-          id="viber"
-          class="m-1 cursor-pointer"
-          type="checkbox"
-          name="messanger"
-          value="viber"
-          formControlName="1"
-        />
-        <label for="viber" class="m-1 select-none cursor-pointer">Viber</label>
-      </div>
-
-      <div>
-        <input
-          id="whatsapp"
-          class="m-1 cursor-pointer"
-          type="checkbox"
-          name="messanger"
-          value="whatsapp"
-          formControlName="2"
-        />
-        <label for="whatsapp" class="m-1 select-none cursor-pointer"
-          >WhatsApp</label
-        >
-      </div>
-    </fieldset>
-    }
-
-    <div>
+    <div [appDropout]="'Slack user name'">
       <label for="slackUsername" class="block m-1"
         >Slack user name (not necessarily):
       </label>
 
       <input
         id="slackUsername"
-        class="block w-full border border-gray-400 rounded-lg p-2 m-1 placeholder:text-gray-300"
+        class="block w-full border border-gray-400 rounded-lg p-2 placeholder:text-gray-300"
         type="text"
         name="slackUsername"
         autocomplete="username"
@@ -152,7 +154,7 @@
   <div class="my-4 text-center">
     <button
       type="submit"
-      class="m-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+      class="m-1 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 cursor-pointer"
     >
       Update account
     </button>

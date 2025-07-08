@@ -8,12 +8,7 @@ import {
   OnInit,
   OnChanges,
 } from '@angular/core';
-import {
-  Auth,
-  updateEmail,
-  updatePassword,
-  createUserWithEmailAndPassword,
-} from '@angular/fire/auth';
+import { Auth, updateEmail, updatePassword } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 import {
   ReactiveFormsModule,
@@ -26,10 +21,11 @@ import {
 import { Router } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { Dropout } from '../../../directives/dropout';
 
 @Component({
   selector: 'app-edit-user-from',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Dropout],
   templateUrl: './edit-user-from.html',
   styleUrl: './edit-user-from.scss',
 })
