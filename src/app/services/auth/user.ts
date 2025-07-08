@@ -4,6 +4,7 @@ import {
   onAuthStateChanged,
   User as FirebaseUser,
   signOut,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
@@ -33,5 +34,15 @@ export class User {
       .catch((error) => {
         console.error('Logout failed', error);
       });
+  }
+
+  async resetPassword(email: string) {
+    try {
+      await sendPasswordResetEmail(this.auth, email);
+      alert('The password reset email was sent!');
+    } catch (error) {
+      alert('Error of email sending.');
+      console.error('Error of email sending ', error);
+    }
   }
 }

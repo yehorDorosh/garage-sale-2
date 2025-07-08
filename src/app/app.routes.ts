@@ -5,6 +5,7 @@ import { SignupPage } from './pages/signup-page/signup-page';
 import { AccountPage } from './pages/account-page/account-page';
 import { authGuard, unAuthZoneGuard } from './router-guards';
 import { NotFoundPage } from './pages/not-found-page/not-found-page';
+import { ResetPasswordPage } from './pages/reset-password-page/reset-password-page';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
     path: 'user',
     component: AccountPage,
     canActivate: [authGuard],
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordPage,
   },
   {
     path: '**',
